@@ -1,6 +1,6 @@
 @charset "UTF-8";
 :root {
-  --index: 1; /* Defina o valor inicial da variável */
+  --index: 1; /* Define o valor inicial da variável */
 }
 
 * {
