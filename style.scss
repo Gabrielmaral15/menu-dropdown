@@ -1,0 +1,159 @@
+:root {
+  --index: 1; /* Defina o valor inicial da variável */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #333;
+  font-family: arial;
+}
+
+ul {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  gap: 1.5rem;
+  list-style: none;
+  background: #222;
+}
+
+ul li {
+  display: inline-block;
+  position: relative;
+}
+
+ul li a {
+  display: block;
+  padding: 20px 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  transition: all .3s ease;
+}
+
+#languages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: .3rem;
+
+  // width: inherit;
+  // height: 100%;
+
+  img {
+    width: 1rem;
+  }
+}
+
+ul li a:hover {
+  background-color: #171717;
+}
+
+.dropdown {  
+  z-index: 99;
+
+  opacity: 0;
+  pointer-events: none;
+
+  position: absolute;
+  display: block;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  height: 0;
+  background-color: #222;
+  transition: all .3s ease;
+}
+
+.dropdown li {
+  display: block;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+ul li:hover .dropdown {
+  opacity: 1;
+  pointer-events: all;
+
+  animation: dropDown .5s forwards;
+}
+
+@keyframes dropDown {
+  0% {
+    height: 0;
+  }
+  
+  100% {
+    height: 400%;
+  }
+}
+
+/* Animação para os itens do dropdown */
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Aplica a animação aos itens do dropdown */
+
+ul li:hover .dropdown li {
+  animation: fadeIn .3s forwards;
+  animation-delay: calc(.1s * var(--index)); 
+
+  &:nth-child(1) {
+    --index: 1;
+  }
+  &:nth-child(2) {
+    --index: 2;
+  }
+  &:nth-child(3) {
+    --index: 3;
+  }
+  &:nth-child(4) {
+    --index: 4;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Aplica a animação aos itens do dropdown quando o hover é removido */
+
+@keyframes dropUp {
+  0% {
+    height: 400%;
+  }
+  
+  100% {
+    height: 0;
+  }
+}
+
+ul li:not(:hover) .dropdown {
+  animation: dropUp .5s forwards;
+}
+
+ul li:not(:hover) .dropdown li {
+  animation: fadeOut .3s forwards;
+}
